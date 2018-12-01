@@ -1,6 +1,6 @@
 package bot
 
-type CasinoBot struct {
+type SimpleBotBase struct {
 	IPPort   string
 	Account  string
 	Password string

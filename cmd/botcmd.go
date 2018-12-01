@@ -7,8 +7,8 @@ import (
 )
 
 var RootCmd = &cobra.Command{
-	Use: "casinobot",
+	Use: "simplebot",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("CasinoBot, args: ", args)
+		fmt.Println("SimpleBotBase, args: ", args)
 	},
 }

@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"casino_bot/bot"
 	"fmt"
+	"simplebot/bot"
 
 	"github.com/spf13/cobra"
 )

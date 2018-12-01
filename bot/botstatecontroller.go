@@ -1,11 +1,11 @@
 package bot
 
 import (
-	"casino_server/util/log"
 	"fmt"
 	"os"
 	"os/signal"
 	"reflect"
+	"simplebot/utils/log"
 	"strings"
 	"time"
 
@@ -14,15 +14,15 @@ import (
 
 type BotState interface {
 	GetStateName() string
-	InitState(bot *CasinoBot)
-	OnStateEnter(bot *CasinoBot)
-	OnStateExit(bot *CasinoBot)
-	OnUpdate(bot *CasinoBot)
-	OnForceStop(bot *CasinoBot)
+	InitState(bot *SimpleBotBase)
+	OnStateEnter(bot *SimpleBotBase)
+	OnStateExit(bot *SimpleBotBase)
+	OnUpdate(bot *SimpleBotBase)
+	OnForceStop(bot *SimpleBotBase)
 }
 
 type BotStateController struct {
-	bot          *CasinoBot
+	bot          *SimpleBotBase
 	stateMap     map[string]BotState
 	currentState string
 	botFsm       *fsm.FSM
@@ -50,13 +50,13 @@ func RegistState(state BotState) {
 	}
 }
 
-func NewBotStateController(bot *CasinoBot, stateString string) (controller *BotStateController) {
+func NewBotStateController(bot *SimpleBotBase, stateString string) (controller *BotStateController) {
 	controller = &BotStateController{}
 	controller.Init(bot, stateString)
 	return controller
 }
 
-func (b *BotStateController) Init(bot *CasinoBot, stateString string) {
+func (b *BotStateController) Init(bot *SimpleBotBase, stateString string) {
 	b.bot = bot
 	b.tickerDur = stateUpdateDuration
 	b.debugLog = false

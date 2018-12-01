@@ -1,11 +1,11 @@
 package main
 
 import (
-	_ "casino_bot/bot"
-	_ "casino_bot/bot/states"
-	"casino_bot/cmd"
 	"fmt"
 	"os"
+	_ "simplebot/bot"
+	_ "simplebot/bot/states"
+	"simplebot/cmd"
 )
 
 func main() {

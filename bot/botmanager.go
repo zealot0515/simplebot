@@ -7,10 +7,10 @@ import (
 	"time"
 )
 
-var botPool []*CasinoBot
+var botPool []*SimpleBotBase
 
 func init() {
-	botPool = []*CasinoBot{}
+	botPool = []*SimpleBotBase{}
 }
 
 // StartBot 啟動單一BOT
@@ -26,7 +26,7 @@ func StartBot(ipport string, acc string, pwd string, stateString string) {
 // StartMultiBot 啟動多個BOT
 func StartMultiBot(ipport string, accPrefix string, pwd string, count int, stateString string) {
 	fmt.Printf("Start Multi Bot, AccPrefix:%s, stateString:%s...\n", accPrefix, stateString)
-	var bot *CasinoBot
+	var bot *SimpleBotBase
 	for i := 0; i < count; i++ {
 		bot = NewBot(ipport, fmt.Sprintf("%s%v", accPrefix, i), pwd, stateString)
 		botPool = append(botPool, bot)

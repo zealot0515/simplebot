@@ -1,8 +1,8 @@
 package bot
 
 // NewBot 產一個新的BOT實體
-func NewBot(ipport string, acc string, pwd string, stateString string) (bot *CasinoBot) {
-	bot = &CasinoBot{
+func NewBot(ipport string, acc string, pwd string, stateString string) (bot *SimpleBotBase) {
+	bot = &SimpleBotBase{
 		IPPort:   ipport,
 		Account:  acc,
 		Password: pwd,
