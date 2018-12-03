@@ -26,19 +26,19 @@ func (s *TemplateState) InitState(bot *bot.SimpleBotBase) {
 }
 
 func (s *TemplateState) OnStateEnter(bot *bot.SimpleBotBase) {
-	log.PrintDebugLog(s.debugLog, "template.OnStateEnter, ", bot.Account)
+	log.PrintDebugLog(s.debugLog, "template.OnStateEnter")
 }
 
 func (s *TemplateState) OnStateExit(bot *bot.SimpleBotBase) {
-	log.PrintDebugLog(s.debugLog, "template.OnStateExit, ", bot.Account)
+	log.PrintDebugLog(s.debugLog, "template.OnStateExit")
 }
 
 func (s *TemplateState) OnUpdate(bot *bot.SimpleBotBase) {
-	log.PrintDebugLog(s.debugLog, "template.OnStateUpdate, ", bot.Account)
+	log.PrintDebugLog(s.debugLog, "template.OnStateUpdate")
 
 	bot.BotState.StateDone(s.GetStateName())
 }
 
 func (s *TemplateState) OnForceStop(bot *bot.SimpleBotBase) {
-	log.PrintDebugLog(s.debugLog, "template.OnForceStop, ", bot.Account)
+	log.PrintDebugLog(s.debugLog, "template.OnForceStop")
 }

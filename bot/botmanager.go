@@ -14,9 +14,9 @@ func init() {
 }
 
 // StartBot 啟動單一BOT
-func StartBot(ipport string, acc string, pwd string, stateString string) {
-	fmt.Printf("Start Bot, Acc:%s, stateString:%s...\n", acc, stateString)
-	var bot = NewBot(ipport, acc, pwd, stateString)
+func StartBot(paramString string, stateString string) {
+	fmt.Printf("Start Bot, paramString:%s, stateString:%s...\n", paramString, stateString)
+	var bot = NewBot(paramString, stateString, 0)
 	botPool = append(botPool, bot)
 	bot.BotState.StartBot()
 	fmt.Println("Start Bot Done")
@@ -24,14 +24,13 @@ func StartBot(ipport string, acc string, pwd string, stateString string) {
 }
 
 // StartMultiBot 啟動多個BOT
-func StartMultiBot(ipport string, accPrefix string, pwd string, count int, stateString string) {
-	fmt.Printf("Start Multi Bot, AccPrefix:%s, stateString:%s...\n", accPrefix, stateString)
+func StartMultiBot(paramString string, stateString string, count int) {
 	var bot *SimpleBotBase
 	for i := 0; i < count; i++ {
-		bot = NewBot(ipport, fmt.Sprintf("%s%v", accPrefix, i), pwd, stateString)
+		bot = NewBot(paramString, stateString, i)
 		botPool = append(botPool, bot)
 		bot.BotState.StartBot()
-		fmt.Printf("Start Bot %s Done\n", bot.Account)
+		fmt.Printf("Start Bot %d Done\n", i)
 	}
 	WaitMethod()
 }

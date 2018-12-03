@@ -34,7 +34,7 @@ type BotStateController struct {
 }
 
 var botStatesMap map[string]BotState
-var stateUpdateDuration = time.Duration(500 * time.Millisecond)
+var stateUpdateDuration = time.Duration(100 * time.Millisecond)
 var initState = "wait"
 
 func RegistState(state BotState) {

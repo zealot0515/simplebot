@@ -15,16 +15,16 @@ var startmultibotCmd = &cobra.Command{
 		var err error
 		var count int
 		switch len(args) {
-		case 5:
-			count, err = strconv.Atoi(args[3])
+		case 3:
+			count, err = strconv.Atoi(args[2])
 			if err != nil {
 				fmt.Println("get count error:", err)
 				return
 			}
 
-			bot.StartMultiBot(args[0], args[1], args[2], count, args[4])
+			bot.StartMultiBot(args[0], args[1], count)
 		default:
-			fmt.Printf("error args, use like this:startmultibot ip:port Acc Pwd count StateString")
+			fmt.Printf("error args, use like this:startmultibot arg1,arg2,arg3 StateString botcount")
 		}
 	},
 }

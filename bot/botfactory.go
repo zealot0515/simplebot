@@ -1,14 +1,15 @@
 package bot
 
+import (
+	"strings"
+)
+
 // NewBot 產一個新的BOT實體
-func NewBot(ipport string, acc string, pwd string, stateString string) (bot *SimpleBotBase) {
+func NewBot(paramString string, stateString string, botIdx int) (bot *SimpleBotBase) {
+	var params = strings.Split(paramString, ",")
 	bot = &SimpleBotBase{
-		IPPort:   ipport,
-		Account:  acc,
-		Password: pwd,
-		BotData: BotDatas{
-			PlayMoney: 0,
-		},
+		IPPort:   params[0],
+		BotData:  BotDatas{},
 		BotState: nil,
 	}
 	bot.BotState = NewBotStateController(bot, stateString)
