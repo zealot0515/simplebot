@@ -1,7 +1,7 @@
-## simple bot
+# simple bot
 
-# run multi bot 
+## run multi bot 
 simplebot startmultibot serverhost:6666 sockettest 5
 
-# run single bot
+## run single bot
 simplebot startbot serverhost:6666 sockettest
