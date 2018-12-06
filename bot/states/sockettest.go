@@ -7,7 +7,7 @@ import (
 	"tcpservertest/client/tcpclient"
 )
 
-// SocketTest 註冊帳號的State, 如果帳號沒註冊過, 跑過這個State會進行註冊
+// SocketTest tcpserver連線測試的state, 連線上後會持續送出cmd給server
 type SocketTest struct {
 	bot.BotState
 	client   *tcpclient.TCPClient
