@@ -1,17 +1,17 @@
 package bot
 
-import (
-	"strings"
-)
+var botCreator BotCreator
 
 // NewBot 產一個新的BOT實體
-func NewBot(paramString string, stateString string, botIdx int) (bot *SimpleBotBase) {
-	var params = strings.Split(paramString, ",")
-	bot = &SimpleBotBase{
-		IPPort:   params[0],
-		BotData:  BotDatas{},
-		BotState: nil,
+func NewBot(paramString string, stateString string, botIdx int) (bot interface{}) {
+	if botCreator != nil {
+		bot = botCreator.New(paramString, botIdx)
+		var botBase = bot.(BotBaseGetter).GetBotBase()
+		botBase.BotState = NewBotStateController(bot, stateString)
 	}
-	bot.BotState = NewBotStateController(bot, stateString)
 	return bot
+}
+
+func RegistCreator(creator BotCreator) {
+	botCreator = creator
 }

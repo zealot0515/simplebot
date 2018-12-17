@@ -7,10 +7,10 @@ import (
 	"time"
 )
 
-var botPool []*SimpleBotBase
+var botPool []interface{}
 
 func init() {
-	botPool = []*SimpleBotBase{}
+	botPool = []interface{}{}
 }
 
 // StartBot 啟動單一BOT
@@ -18,18 +18,18 @@ func StartBot(paramString string, stateString string) {
 	fmt.Printf("Start Bot, paramString:%s, stateString:%s...\n", paramString, stateString)
 	var bot = NewBot(paramString, stateString, 0)
 	botPool = append(botPool, bot)
-	bot.BotState.StartBot()
+	bot.(BotBaseGetter).GetBotBase().BotState.StartBot()
 	fmt.Println("Start Bot Done")
 	WaitMethod()
 }
 
 // StartMultiBot 啟動多個BOT
 func StartMultiBot(paramString string, stateString string, count int) {
-	var bot *SimpleBotBase
+	var bot interface{}
 	for i := 0; i < count; i++ {
 		bot = NewBot(paramString, stateString, i)
 		botPool = append(botPool, bot)
-		bot.BotState.StartBot()
+		bot.(BotBaseGetter).GetBotBase().BotState.StartBot()
 		fmt.Printf("Start Bot %d Done\n", i)
 	}
 	WaitMethod()

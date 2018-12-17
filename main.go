@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"os"
-	_ "simplebot/bot"
-	_ "simplebot/bot/states"
 	"simplebot/cmd"
+	_ "simplebot/example/hellobot"
+	_ "simplebot/example/hellobot/states"
 )
 
 func main() {

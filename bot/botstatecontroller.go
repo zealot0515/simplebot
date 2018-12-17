@@ -14,15 +14,15 @@ import (
 
 type BotState interface {
 	GetStateName() string
-	InitState(bot *SimpleBotBase)
-	OnStateEnter(bot *SimpleBotBase)
-	OnStateExit(bot *SimpleBotBase)
-	OnUpdate(bot *SimpleBotBase)
-	OnForceStop(bot *SimpleBotBase)
+	InitState(botObj interface{})
+	OnStateEnter(botObj interface{})
+	OnStateExit(botObj interface{})
+	OnUpdate(botObj interface{})
+	OnForceStop(botObj interface{})
 }
 
 type BotStateController struct {
-	bot          *SimpleBotBase
+	bot          interface{}
 	stateMap     map[string]BotState
 	currentState string
 	botFsm       *fsm.FSM
@@ -34,7 +34,7 @@ type BotStateController struct {
 }
 
 var botStatesMap map[string]BotState
-var stateUpdateDuration = time.Duration(100 * time.Millisecond)
+var defaultstateUpdateDuration = time.Duration(100 * time.Millisecond)
 var initState = "wait"
 
 func RegistState(state BotState) {
@@ -50,15 +50,18 @@ func RegistState(state BotState) {
 	}
 }
 
-func NewBotStateController(bot *SimpleBotBase, stateString string) (controller *BotStateController) {
+func NewBotStateController(bot interface{}, stateString string) (controller *BotStateController) {
 	controller = &BotStateController{}
 	controller.Init(bot, stateString)
 	return controller
 }
 
-func (b *BotStateController) Init(bot *SimpleBotBase, stateString string) {
+func (b *BotStateController) Init(bot interface{}, stateString string) {
 	b.bot = bot
-	b.tickerDur = stateUpdateDuration
+	b.tickerDur = bot.(BotBaseGetter).GetHeartBeatTime()
+	if b.tickerDur <= 0 {
+		b.tickerDur = defaultstateUpdateDuration
+	}
 	b.debugLog = false
 	//Load All State And Init Fsm
 	b.initFSM(stateString)
